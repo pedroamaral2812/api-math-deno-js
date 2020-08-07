@@ -1,6 +1,6 @@
 import { Router } from 'https://deno.land/x/oak/mod.ts';
 import {JurosSimples, CapitalJurosSimples, TaxaJurosSimples, TempoJurosSimples} from '../controllers/juros-simples-controller.ts';
-import {CalculaTabelaPrice, CalculaTabelaSAC} from '../controllers/tabela-preco-controller.ts';
+import {CalculaTabelaPrice, CalculaTabelaSAC, CalculaSemJuros} from '../controllers/tabela-preco-controller.ts';
 
 const router = new Router();
 
@@ -13,6 +13,7 @@ router
   /* Tabelas de preços */
   .post("/CalculaTabelaPrice",CalculaTabelaPrice)
   .post("/CalculaTabelaSAC",CalculaTabelaSAC)
+  .post("/CalculaSemJuros",CalculaSemJuros)
   ;
 
 
