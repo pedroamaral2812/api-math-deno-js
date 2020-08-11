@@ -1,8 +1,9 @@
- import {Pedido} from '../utils/TabelaPrecos/Pedido.ts';
- import CalculadoraDeJuros from '../utils/TabelaPrecos/CalculadoraDeJuros.ts';
- import {TabelaPrice} from '../utils/TabelaPrecos/TabelaPrice.ts';
- import {TabelaSAC} from '../utils/TabelaPrecos/TabelaSAC.ts';
+import {Pedido} from '../utils/TabelaPrecos/Pedido.ts';
+import CalculadoraDeJuros from '../utils/TabelaPrecos/CalculadoraDeJuros.ts';
+import {TabelaPrice} from '../utils/TabelaPrecos/TabelaPrice.ts';
+import {TabelaSAC} from '../utils/TabelaPrecos/TabelaSAC.ts';
 import { SemJuros } from './../utils/TabelaPrecos/SemJuros.ts';
+import  tabelaSemJurosCSV  from '../Relatorios/TabelaSemJuros/tabelasSemJurosCSV.ts';
 
 
  const CalculaTabelaPrice = async ({
@@ -48,6 +49,10 @@ import { SemJuros } from './../utils/TabelaPrecos/SemJuros.ts';
         let tabela = new SemJuros();
         let calculadora = new CalculadoraDeJuros(tabela);
         let resultado = calculadora.calculaJuros(pedido);
+        let CSVRelatorio = new tabelaSemJurosCSV();
+        
+        CSVRelatorio.geraCSV(resultado, qtdParcelas);
+
         response.body = { juros: resultado, formula : "Parcela : valor / total de parcelas" };
         response.status = 200;
        
