@@ -1,8 +1,6 @@
 import CalculadoraDeJurosStategyInterface from './CalculadoraDeJurosStategyInterface.ts';
 import  {Pedido}  from './Pedido.ts';
 
-
-
 export class TabelaPrice implements CalculadoraDeJurosStategyInterface
 {
   public getTaxaDeJuros(pedido : Pedido){

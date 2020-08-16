@@ -3,8 +3,10 @@ import CalculadoraDeJuros from '../utils/TabelaPrecos/CalculadoraDeJuros.ts';
 import {TabelaPrice} from '../utils/TabelaPrecos/TabelaPrice.ts';
 import {TabelaSAC} from '../utils/TabelaPrecos/TabelaSAC.ts';
 import { SemJuros } from './../utils/TabelaPrecos/SemJuros.ts';
-import  tabelaSemJurosCSV  from '../Relatorios/TabelaSemJuros/tabelasSemJurosCSV.ts';
 
+/* Relatorios CSV */
+import  tabelaSemJurosCSV  from '../Relatorios/TabelaSemJuros/tabelasSemJurosCSV.ts';
+import  tabelaPriceCSV  from '../Relatorios/TabelaPrice/tabelaPriceCSV.ts';
 
  const CalculaTabelaPrice = async ({
   request,response,
@@ -17,7 +19,11 @@ import  tabelaSemJurosCSV  from '../Relatorios/TabelaSemJuros/tabelasSemJurosCSV
     let tabela = new TabelaPrice();
     let calculadora = new CalculadoraDeJuros(tabela);
     let resultado = calculadora.calculaJuros(pedido);
-    response.body = { juros: resultado, formula : "Juros = Capital x tempo x (taxa/100)" };
+
+    let CSVRelatorio = new tabelaPriceCSV();
+    
+    CSVRelatorio.geraCSV(valorFinanciado, taxa, resultado, qtdParcelas);
+    response.body = { juros: Number(resultado).toFixed(2) };
     response.status = 200;
    
   };
